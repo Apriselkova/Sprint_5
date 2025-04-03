@@ -15,14 +15,14 @@ const (
 	StepLength = 0.65
 )
 
-// создайте структуру DaySteps
+// структура DaySteps содержит все необходимые данные о дневных прогулках: количество шагов, длительность, а также данные из структуры personaldata.Personal
 type DaySteps struct {
 	Steps    int
 	Duration time.Duration
 	personaldata.Personal
 }
 
-// создайте метод Parse()
+// сметод Parse() парсит строку с данными формата "678,0h50m" и записывает данные в соответствующие поля структуры DaySteps.
 func (ds *DaySteps) Parse(datastring string) (err error) {
 	slice := strings.Split(datastring, ",")
 	if len(slice) != 2 {
@@ -47,14 +47,14 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	return nil
 }
 
-// создайте метод ActionInfo()
+// метод ActionInfo() формирует и возвращает строку с данными о прогулке
 func (ds DaySteps) ActionInfo() (string, error) {
 	if ds.Duration <= 0 {
 		return "", errors.New("Duration must be greater than 0")
 	}
 
 	// Вычисляем дистанцию
-	distance := float64(ds.Steps) * StepLength / 1000 // в километрах
+	distance := float64(ds.Steps) * StepLength / 1000
 	// Вычисляем количество сожжённых калорий
 	calories := spentenergy.WalkingSpentCalories(ds.Steps, float64(ds.Weight), float64(ds.Height), ds.Duration)
 	if calories == 0 {
