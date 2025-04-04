@@ -53,7 +53,7 @@ func (t *Training) Parse(datastring string) (err error) {
 // создайте метод ActionInfo()
 func (t Training) ActionInfo() (string, error) {
 	if t.Duration <= 0 {
-		return "", errors.New("Duration must be greater than 0")
+		return "", errors.New("duration must be greater than 0")
 	}
 
 	distance := spentenergy.Distance(t.Steps)
@@ -63,7 +63,7 @@ func (t Training) ActionInfo() (string, error) {
 
 	switch t.TrainingType {
 	case "Бег":
-		calories = spentenergy.RunningSpentCalories(t.Steps, float64(t.Weight), t.Duration)
+		calories = spentenergy.RunningSpentCalories(t.Steps, t.Weight, t.Duration)
 	case "Ходьба":
 		calories = spentenergy.WalkingSpentCalories(t.Steps, float64(t.Weight), float64(t.Height), t.Duration)
 	default:

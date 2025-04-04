@@ -69,5 +69,5 @@ func MeanSpeed(steps int, duration time.Duration) float64 {
 
 // Distance возвращает дистанцию(в километрах), которую преодолел пользователь за время тренировки.
 func Distance(steps int) float64 {
-	return float64(steps) * lenStep / float64(mInKm)
+	return float64(steps) * lenStep / (mInKm)
 }
